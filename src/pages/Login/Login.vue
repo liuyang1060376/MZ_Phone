@@ -1,0 +1,177 @@
+<template>
+  <div>
+      <Nav />
+    <div class="login_type" >
+      <ul>
+        <li @click="switchLogin('1')">手机快速登录 <i v-if="loginType===1" ></i></li>
+        <li @click="switchLogin('2')">用户密码登录 <i v-if="loginType===2"></i></li>
+      </ul>
+    </div>
+    <!--验证码登录-->
+    <form v-if="loginType===1">
+      <div class="mibble">
+        <label><span>+86</span><i class="icon iconfont">&#xe60a;</i></label>
+        <input type="number"  placeholder="请输入手机号">
+      </div>
+      <div class="code">
+        <input type="password" placeholder="请输入收到的验证码"><a href="">获取验证码</a>
+      </div>
+      <a class="login_btn" href="">登录</a>
+    </form>
+    <form v-else action="">
+      <div class="mibble">
+        <input type="number"  placeholder="请输入手机号">
+      </div>
+      <div class="pwd">
+        <input type="password" placeholder="请输入密码">
+        <span class="icon iconfont">&#xe704;</span>
+        <a href="">忘记密码</a>
+      </div>
+      <a class="login_btn" href="">登录</a>
+    </form>
+    <a class="register" @click="linkTo">立即注册</a>
+  </div>
+
+</template>
+
+<script>
+import Nav from "../../components/Login/LoginNav";
+
+export default {
+  name: "Login",
+  data(){
+    return{
+      loginType:1
+    }
+  },
+  methods:{
+    //切换登录方式
+    switchLogin(type){
+      if(type==='1'){
+        this.loginType=1
+      }else{
+        this.loginType=2
+      }
+    },
+    linkTo(){
+      this.$router.replace('/register')
+    }
+  },
+  components:{Nav},
+}
+</script>
+
+<style lang="less">
+@import "../../assets/css/BaseFont";
+  .login_type{
+    height: 66rem / @baseFont;
+    line-height: 66rem / @baseFont;
+    font-size: 17rem / @baseFont;
+    background-color: #fafcfb;
+    text-align: center;
+    margin-bottom: 30rem / @baseFont;
+    ul{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-around;
+      li{
+        flex: 1;
+        position: relative;
+        i{
+          display: inline-block;
+          width: 45rem / @baseFont;
+          height: 2px;
+          background-color: #348903;
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translate(-50%);
+        }
+      }
+    }
+  }
+  form{
+    width: 90%;
+    margin: 0  auto;
+    text-align: center;
+    .mibble{
+      margin-bottom: 30rem / @baseFont;
+      height: 76rem / @baseFont;
+      line-height: 76rem / @baseFont;
+      font-size: 22rem / @baseFont;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+      i{
+        font-size: 12rem / @baseFont;
+        padding: 0 5rem / @baseFont;
+      }
+      input{
+        width: 400rem / @baseFont;
+        height: 80%;
+        border: 0;
+      }
+    }
+    .code,.pwd {
+      height: 76rem / @baseFont;
+      line-height: 76rem / @baseFont;
+      font-size: 22rem / @baseFont;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20rem / @baseFont;
+      input {
+        flex: 1;
+        height: 100%;
+        box-sizing: border-box;
+        border: 0;
+      }
+      a {
+        width: 151rem / @baseFont;
+        height:50rem / @baseFont ;
+        line-height:50rem / @baseFont ;
+        margin-top: 10rem / @baseFont;
+        padding: 0 20rem / @baseFont;
+        box-sizing: border-box;
+        border-left: 1px solid #ccc;
+        font-size: 14rem / @baseFont;
+      }
+    }
+    .pwd {
+      a {
+        width: 151rem / @baseFont;
+        height:50rem / @baseFont ;
+        line-height:50rem / @baseFont ;
+        margin-top: 10rem / @baseFont;
+        padding: 0 20rem / @baseFont;
+        box-sizing: border-box;
+        border-left: 1px solid #ccc;
+        font-size: 14rem / @baseFont;
+      }
+      span {
+        width: 80rem / @baseFont;
+        height: 100%;
+        color: #ccc;
+        cursor: pointer;
+      }
+    }
+    .login_btn {
+      display: inline-block;
+      width: 100%;
+      height: 75rem / @baseFont;
+      line-height: 75rem / @baseFont;
+      background-color: #348903;
+      color: #fff;
+      font-size: 25rem / @baseFont;
+      text-align: center;
+      border-radius: 40px;
+    }
+  }
+  .register{
+    width: 100%;
+    height: 50rem / @baseFont;
+    position: absolute;
+    bottom: 120px;
+    text-align: center;
+  }
+</style>
