@@ -24,7 +24,7 @@ import banner from "../../components/Home/banner";
 import ServiceList from "../../components/Home/ServiceList";
 export default {
   name: "Home",
-  components:{Slider, Nav,Shortcart,EnterList,Hot,HealthyManage,News,banner,ServiceList}
+  components:{Slider, Nav,Shortcart,EnterList,Hot,HealthyManage,News,banner,ServiceList},
 }
 </script>
 

@@ -11,10 +11,13 @@
     <form v-if="loginType===1">
       <div class="mibble">
         <label><span>+86</span><i class="icon iconfont">&#xe60a;</i></label>
-        <input type="number"  placeholder="请输入手机号">
+        <input type="number"  placeholder="请输入手机号" v-model="mobile">
       </div>
       <div class="code">
-        <input type="password" placeholder="请输入收到的验证码"><a href="">获取验证码</a>
+        <input type="password" placeholder="请输入收到的验证码">
+        <a v-if="!timer1" href="" @click.prevent="getCode(mobile)">获取验证码</a>
+
+        <a class="disenable" v-else href="" @click.prevent="getCode(mobile)">已发送{{ timer1 }}s</a>
       </div>
       <a class="login_btn" href="">登录</a>
     </form>
@@ -36,12 +39,21 @@
 
 <script>
 import Nav from "../../components/Login/LoginNav";
+import {getCode} from "../../api/api";
 
 export default {
   name: "Login",
   data(){
     return{
-      loginType:1
+      loginType:1,
+      mobile:'',
+      timer1:0  //验证码倒计时
+    }
+  },
+  computed: {
+    // 验证手机号是否合理
+    phoneRight() {
+      return /^[1][3,4,5,7,8,9][0-9]{9}$/.test(this.mobile)
     }
   },
   methods:{
@@ -53,8 +65,38 @@ export default {
         this.loginType=2
       }
     },
+    // 跳转到注册页面
     linkTo(){
       this.$router.replace('/register')
+    },
+    //登录
+    login(mobile){
+
+    },
+
+    //获取验证码
+    async getCode(mobile){
+      if(this.phoneRight){
+        let that = this
+        that.timer1=60
+        let result = await getCode(mobile)
+        if (result.code===200){
+          alert('发送成功')
+        }else{
+          alert('发送失败')
+        }
+        that.timer=setInterval(function () {
+          that.timer1-=1
+          if(that.timer1===0){
+            clearInterval(that.timer)
+            that.timer1=0
+          }
+        },1000)
+      }else{
+        alert('手机号码错误')
+      }
+
+
     }
   },
   components:{Nav},
@@ -135,6 +177,11 @@ export default {
         box-sizing: border-box;
         border-left: 1px solid #ccc;
         font-size: 14rem / @baseFont;
+      }
+      .disenable{
+        pointer-events: none;
+        cursor: default;
+        color: gray;
       }
     }
     .pwd {

@@ -1,5 +1,5 @@
 import axios from  'axios'
-
+console.log('hahah')
 export default function (url = '', params = {}, type = 'GET') {
   return new Promise((resolve,reject)=>{
     let paramsStr = '?'
@@ -8,13 +8,14 @@ export default function (url = '', params = {}, type = 'GET') {
         paramsStr=paramsStr+value+'='+params[value]+'&'
       })
       //过滤最后的&
+      let newParamsStr=''
       if(paramsStr!==null){
         newParamsStr=paramsStr.substr(0,paramsStr.lastIndexOf('&'))
       }
-      url+=url+newParamsStr
-      promise=axios.get(url)
+      url=url+newParamsStr
+      var promise=axios.get(url)
     }else{
-      promise=axios.post(url,params)
+      var promise=axios.post(url,params)
     }
     promise.then(function (response) {
       resolve(response.data)

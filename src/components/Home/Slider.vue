@@ -2,9 +2,8 @@
   <div>
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="https://ikapp-image.health.ikang.com/2020/11/17/202011171356470310.jpg?432-1029!/fw/750/format/webp" alt=""></div>
-        <div class="swiper-slide"><img src="https://ikapp-image.health.ikang.com/2020/09/27/202009271555262530.jpg?432-1029!/fw/750/format/webp" alt=""></div>
-        <div class="swiper-slide"><img src="https://ikapp-image.health.ikang.com/2020/11/17/202011171356470310.jpg?432-1029!/fw/750/format/webp" alt=""></div>
+        <div v-for='(item,index) in BannerList'
+          class="swiper-slide"><img :src="item.ImageAddress" alt=""></div>
       </div>
     </div>
   </div>
@@ -12,19 +11,26 @@
 
 <script>
 import Swiper from "swiper";
+import {mapState} from 'vuex'
 export default {
 name: "Slider",
+  created() {
+
+  },
+  computed:{
+    ...mapState(['BannerList'])
+  },
   mounted() {
-    var mySwiper = new Swiper('.swiper-container', {
-      autoplay: true,//可选选项，自动滑动
-      delay:2000
+    this.$store.dispatch('reqBannerList',function () {
+      var mySwiper = new Swiper('.swiper-container', {
+        autoplay: true,//可选选项，自动滑动
+        delay:2000
+      })
     })
 
-//如果你初始化时没有定义Swiper实例，后面也可以通过Swiper的HTML元素来获取该实例
-    new Swiper('.swiper-container')
-    var mySwiper = document.querySelector('.swiper-container').swiper
-    mySwiper.slideNext();
-  }
+    console.log(this.$store.state.BannerList)
+
+  },
 }
 
 </script>
