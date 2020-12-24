@@ -37,7 +37,7 @@ export default new Router({
     },
     {
       path:'/my',
-      redirect: '/LoginSelect'
+      component: My
     },
     {
       path:'/report',

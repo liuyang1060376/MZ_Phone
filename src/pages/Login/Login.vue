@@ -14,23 +14,23 @@
         <input type="number"  placeholder="请输入手机号" v-model="mobile">
       </div>
       <div class="code">
-        <input type="password" placeholder="请输入收到的验证码">
+        <input type="text" placeholder="请输入收到的验证码" v-model="code" >
         <a v-if="!timer1" href="" @click.prevent="getCode(mobile)">获取验证码</a>
 
         <a class="disenable" v-else href="" @click.prevent="getCode(mobile)">已发送{{ timer1 }}s</a>
       </div>
-      <a class="login_btn" href="">登录</a>
+      <a class="login_btn" href="" @click.prevent="loginTo(mobile,pwd,loginType,code)">登录</a>
     </form>
     <form v-else action="">
       <div class="mibble">
-        <input type="number"  placeholder="请输入手机号">
+        <input type="number"  placeholder="请输入手机号" v-model="mobile">
       </div>
       <div class="pwd">
-        <input type="password" placeholder="请输入密码">
+        <input type="password" placeholder="请输入密码" v-model="pwd">
         <span class="icon iconfont">&#xe704;</span>
         <a href="">忘记密码</a>
       </div>
-      <a class="login_btn" href="">登录</a>
+      <a class="login_btn" @click.prevent="loginTo(this.mobile,this.pwd,this.loginType,this.code)" href="">登录</a>
     </form>
     <a class="register" @click="linkTo">立即注册</a>
   </div>
@@ -39,7 +39,7 @@
 
 <script>
 import Nav from "../../components/Login/LoginNav";
-import {getCode} from "../../api/api";
+import {getCode,login} from "../../api/api";
 
 export default {
   name: "Login",
@@ -47,7 +47,9 @@ export default {
     return{
       loginType:1,
       mobile:'',
-      timer1:0  //验证码倒计时
+      timer1:0,  //验证码倒计时
+      pwd:'',
+      code:''
     }
   },
   computed: {
@@ -70,8 +72,14 @@ export default {
       this.$router.replace('/register')
     },
     //登录
-    login(mobile){
-
+    async loginTo(mobile,pwd,type,code){
+      console.log(mobile,pwd,type,code)
+      let result=await login(mobile,pwd,type,code)
+      if(result.code===200){
+        this.$router.back();
+      }else{
+        console.log(result)
+      }
     },
 
     //获取验证码

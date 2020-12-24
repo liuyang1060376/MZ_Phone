@@ -2,7 +2,7 @@
   <div>
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div v-for='(item,index) in BannerList'
+        <div v-for='(item,index) in getBannerList'
           class="swiper-slide"><img :src="item.ImageAddress" alt=""></div>
       </div>
     </div>
@@ -11,14 +11,15 @@
 
 <script>
 import Swiper from "swiper";
-import {mapState} from 'vuex'
+import {mapState,mapGetters} from 'vuex'
 export default {
 name: "Slider",
   created() {
 
   },
   computed:{
-    ...mapState(['BannerList'])
+    ...mapState(['BannerList']),
+    ...mapGetters(['getBannerList'])
   },
   mounted() {
     this.$store.dispatch('reqBannerList',function () {

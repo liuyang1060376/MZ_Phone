@@ -1,14 +1,16 @@
 <template>
   <div>
-    <ReportHead />
+    <ReportHead v-if="this.$store.state.user" />
+    <LoginSelect v-else />
   </div>
 </template>
 
 <script>
 import ReportHead from "../../components/Report/ReportHead";
+import LoginSelect from "../Login/LoginSelect";
 export default {
   name: "Report",
-  components:{ReportHead}
+  components:{LoginSelect, ReportHead}
 }
 </script>
 

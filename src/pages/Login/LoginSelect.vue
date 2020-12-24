@@ -4,7 +4,7 @@
     <div class="LoginSelect">
       <div class="logo"><img src="http://www.mztj.cn/images/logo.jpg" alt=""></div>
       <h4>选择登录方式</h4>
-      <router-link tag="a" to="/login">手机登录</router-link>
+      <router-link tag="a" to="/login">{{this.$store.state.user}}</router-link>
     </div>
   </div>
 </template>

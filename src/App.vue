@@ -7,6 +7,7 @@
 
 <script>
 import TabBar from "./components/TabBar/TabBar";
+import {mapState} from 'vuex'
 
 export default {
   name: 'App',
@@ -14,7 +15,13 @@ export default {
     return{
     }
   },
-  components:{TabBar}
+  components:{TabBar},
+  computed:{
+    ...mapState(['user'])
+  },
+  mounted() {
+    this.$store.dispatch('reqUserStatue')
+  }
 }
 </script>
 
