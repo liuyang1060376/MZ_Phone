@@ -1,12 +1,14 @@
 <template>
   <div>
-    报告
+    <ReportHead />
   </div>
 </template>
 
 <script>
+import ReportHead from "../../components/Report/ReportHead";
 export default {
-  name: "Report"
+  name: "Report",
+  components:{ReportHead}
 }
 </script>
 
