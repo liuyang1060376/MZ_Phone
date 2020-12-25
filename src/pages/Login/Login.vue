@@ -73,8 +73,8 @@ export default {
     },
     //登录
     async loginTo(mobile,pwd,type,code){
-      console.log(mobile,pwd,type,code)
       let result=await login(mobile,pwd,type,code)
+      console.log(result)
       if(result.code===200){
         this.$router.back();
       }else{

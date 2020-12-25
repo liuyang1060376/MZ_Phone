@@ -10,14 +10,17 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "element-ui": "^2.14.1",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "ly-tab": "^2.1.2",
+    "pdfjs-dist": "^2.5.207",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "swiper": "^4.3.5",
     "vue": "^2.5.2",
     "vue-axios": "^3.2.0",
+    "vue-pdf": "^4.2.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.6.0"
   },

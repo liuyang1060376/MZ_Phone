@@ -29,7 +29,6 @@ name: "Slider",
       })
     })
 
-    console.log(this.$store.state.BannerList)
 
   },
 }

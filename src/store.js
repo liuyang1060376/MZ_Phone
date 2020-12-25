@@ -31,7 +31,10 @@ export default new Vuex.Store({
     },
      reqUserStatue(content){
       loginStatue().then(result=>{
-        content.commit('setUser',result.data)
+        if(result.code===200){
+          console.log(result.code)
+          content.commit('setUser',result.data)
+        }
       }).catch(err=>{
         console.log(err)
       })
@@ -42,8 +45,6 @@ export default new Vuex.Store({
     getBannerList(state){
       if(state.BannerList===undefined){
         state.BannerList = JSON.parse(sessionStorage.getItem('bannerList'))
-        console.log('ZHIXINGLELEIBU');
-
       }
       return state.BannerList
     },
@@ -51,6 +52,7 @@ export default new Vuex.Store({
       if(state.user===undefined){
         state.user=JSON.parse(sessionStorage.getItem('user'))
       }
+      console.log(state.user)
       return state.user
     }
   }
