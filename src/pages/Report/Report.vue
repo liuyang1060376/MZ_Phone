@@ -1,7 +1,8 @@
 <template>
   <div>
-    <ReportHead v-if="this.$store.state.user" />
-    <LoginSelect v-else />
+    <ReportHead />
+<!--    v-if="this.$store.getters.getUser"-->
+    <!--    <LoginSelect v-else />-->
   </div>
 </template>
 

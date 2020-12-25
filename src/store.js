@@ -16,14 +16,6 @@ export default new Vuex.Store({
     setUser(state,data){
       state.user=data
       sessionStorage.setItem('user',JSON.stringify(data))
-      console.log('第一步')
-      console.log(state.user)
-      if(state.user === undefined){
-        console.log('neibu')
-        state.user=JSON.parse(sessionStorage.getItem('user'))
-      }else{
-        console.log(state.user)
-      }
     },
     setBannerList(state,list){
       state.BannerList=list
@@ -48,16 +40,18 @@ export default new Vuex.Store({
   },
   getters:{
     getBannerList(state){
-      console.log('stateneibu')
-      console.log(state.BannerList)
       if(state.BannerList===undefined){
         state.BannerList = JSON.parse(sessionStorage.getItem('bannerList'))
         console.log('ZHIXINGLELEIBU');
 
       }
-      console.log('KDSAJFKAJ;L');
-      console.log(state.BannerList)
       return state.BannerList
+    },
+    getUser(state){
+      if(state.user===undefined){
+        state.user=JSON.parse(sessionStorage.getItem('user'))
+      }
+      return state.user
     }
   }
 })
