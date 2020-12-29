@@ -1,4 +1,5 @@
 import axios from  'axios'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 console.log('hahah')
 export default function (url = '', params = {}, type = 'GET') {
   return new Promise((resolve,reject)=>{
